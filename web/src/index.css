@@ -1,0 +1,333 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+@import "./shadcn.css";
+
+@custom-variant dark (&:is(.dark *));
+
+@font-face {
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 400 600;
+  font-display: swap;
+  src: url("./fonts/inter-latin.woff2") format("woff2");
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329,
+    U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 400 600;
+  font-display: swap;
+  src: url("./fonts/inter-latin-ext.woff2") format("woff2");
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329,
+    U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+
+:root {
+  --bg: #ffffff;
+  --side: #f8f9fa;
+  --hover: #f1f2f4;
+  --line: #ebecee;
+  --line2: #f4f5f6;
+  --ink: #25272b;
+  --ink2: #5c6169;
+  --mute: #6b7079;
+  --mute-deco: #9a9fa7;
+  --acc: #2f6bf0;
+  --acc-hover: #2459d6;
+  --acc-soft: #edf2fe;
+  --acc-soft-hover: #dce6fc;
+  --acc-ink: #2252c7;
+  --warn: #c2410c;
+  --warn-soft: #fff2ea;
+  --danger: #b4334a;
+  --danger-soft: #fdeeef;
+  --row-hover: #fafbfb;
+  --rec-side: #fcfcfd;
+  --check: #cfd2d7;
+  --assente: #c3c6cb;
+  --line-strong: #d9dbdf;
+
+  --esito-interessato: #157a46;  --esito-interessato-soft: #e8f6ee;
+  --esito-richiamare: #9a6400;
+  --esito-richiamare-soft: #fff5e0;
+  --esito-proposta: #6a45c9;
+  --esito-proposta-soft: #f3effd;
+  --fase-nuovo: #b8bcc3;
+  --fase-contattato: #e0a100;
+  --fase-consulenza: #2f6bf0;
+  --fase-proposta: #8a63e0;
+  --fase-firmato: #1f9d55;
+  --fase-perso: #dc4c64;
+
+  --tipo-nota: var(--esito-richiamare);
+  --tipo-nota-soft: #fff8e6;
+  --tipo-nota-line: #f2e3bb;
+  --tipo-chiamata: var(--acc-ink);
+  --tipo-chiamata-soft: var(--acc-soft);
+  --tipo-email: var(--esito-proposta);
+  --tipo-email-soft: var(--esito-proposta-soft);
+  --tipo-whatsapp: var(--esito-interessato);
+  --tipo-whatsapp-soft: var(--esito-interessato-soft);
+  --tipo-compito: var(--avatar-5-ink);
+  --tipo-compito-soft: var(--avatar-5);
+  --tipo-messaggio: var(--avatar-1-ink);
+  --tipo-messaggio-soft: var(--avatar-1);
+  --tipo-incontro: var(--avatar-6-ink);
+  --tipo-incontro-soft: var(--avatar-6);
+
+  --ombra-seg: 0 1px 2px rgb(20 22 26 / 0.08), 0 0 0 1px var(--line);
+  --ombra-carta: 0 1px 2px rgb(20 22 26 / 0.04);
+  --ombra-pop: 0 10px 30px rgb(20 22 26 / 0.1);
+  --ombra-voce: 0 0 0 1px var(--line);
+  --ombra-pannello: -12px 0 32px rgb(20 22 26 / 0.12);
+  --velo: rgb(20 22 26 / 0.18);
+  --pannello: 1080px;
+  --pannello-fuori: 96px;
+  --pannello-durata: 200ms;
+  --pannello-durata-uscita: 160ms;
+  --riga: 38px;
+  --barra: 236px;
+  --testata: 44px;
+
+  --radius: 9px;
+  --background: var(--bg);
+  --foreground: var(--ink);
+  --card: var(--bg);
+  --card-foreground: var(--ink);
+  --popover: var(--bg);
+  --popover-foreground: var(--ink);
+  --primary: var(--acc);
+  --primary-foreground: var(--bg);
+  --secondary: var(--hover);
+  --secondary-foreground: var(--ink);
+  --muted: var(--hover);
+  --muted-foreground: var(--mute);
+  --accent: var(--hover);
+  --accent-foreground: var(--ink);
+  --destructive: var(--danger);
+  --border: var(--line);
+  --input: var(--line);
+  --ring: var(--acc);
+  --chart-1: var(--fase-consulenza);
+  --chart-2: var(--fase-firmato);
+  --chart-3: var(--fase-contattato);
+  --chart-4: var(--fase-proposta);
+  --chart-5: var(--fase-perso);
+  --sidebar: var(--side);
+  --sidebar-foreground: var(--ink2);
+  --sidebar-primary: var(--ink);
+  --sidebar-primary-foreground: var(--bg);
+  --sidebar-accent: var(--hover);
+  --sidebar-accent-foreground: var(--ink);
+  --sidebar-border: var(--line);
+  --sidebar-ring: var(--acc);
+
+  --avatar-0: #e9f0ff;
+  --avatar-0-ink: #2252c7;
+  --avatar-1: #fdeff4;
+  --avatar-1-ink: #b4335c;
+  --avatar-2: #eef7ef;
+  --avatar-2-ink: #2d7a3e;
+  --avatar-3: #fff4e5;
+  --avatar-3-ink: #a15c00;
+  --avatar-4: #f1eefd;
+  --avatar-4-ink: #6a45c9;
+  --avatar-5: #eaf6f8;
+  --avatar-5-ink: #1f7383;
+  --avatar-6: #e3e8f2;
+  --avatar-6-ink: #3b4a66;
+  --avatar-7: var(--avatar-1);
+  --avatar-8: var(--avatar-3);
+  --avatar-9: var(--avatar-4);
+}
+
+@theme inline {
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --text-xs: 11.5px;
+  --text-xs--line-height: 1.4;
+  --text-cella: 12.5px;
+  --text-cella--line-height: 1.45;
+  --text-sm: 13px;
+  --text-sm--line-height: 1.45;
+  --text-base: 14px;
+  --text-base--line-height: 1.5;
+  --text-titolo: 18px;
+  --text-titolo--line-height: 1.3;
+  --text-scheda: 22px;
+  --text-scheda--line-height: 1.25;
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --shadow-seg: var(--ombra-seg);
+  --shadow-carta: var(--ombra-carta);
+  --shadow-pop: var(--ombra-pop);
+  --shadow-voce: var(--ombra-voce);
+  --spacing-riga: var(--riga);
+  --spacing-testata: var(--testata);
+
+  --color-bg: var(--bg);
+  --color-side: var(--side);
+  --color-hover: var(--hover);
+  --color-line: var(--line);
+  --color-line2: var(--line2);
+  --color-line-strong: var(--line-strong);
+  --color-ink: var(--ink);
+  --color-ink2: var(--ink2);
+  --color-mute: var(--mute);
+  --color-mute-deco: var(--mute-deco);
+  --color-acc: var(--acc);
+  --color-acc-hover: var(--acc-hover);
+  --color-acc-soft: var(--acc-soft);
+  --color-acc-soft-hover: var(--acc-soft-hover);
+  --color-acc-ink: var(--acc-ink);
+  --color-warn: var(--warn);
+  --color-warn-soft: var(--warn-soft);
+  --color-danger: var(--danger);
+  --color-danger-soft: var(--danger-soft);
+  --color-riga-hover: var(--row-hover);
+  --color-rec-side: var(--rec-side);
+  --color-check: var(--check);
+  --color-assente: var(--assente);
+  --color-esito-interessato: var(--esito-interessato);
+  --color-esito-interessato-soft: var(--esito-interessato-soft);
+  --color-esito-richiamare: var(--esito-richiamare);
+  --color-esito-richiamare-soft: var(--esito-richiamare-soft);
+  --color-esito-proposta: var(--esito-proposta);
+  --color-esito-proposta-soft: var(--esito-proposta-soft);
+  --color-fase-nuovo: var(--fase-nuovo);
+  --color-fase-contattato: var(--fase-contattato);
+  --color-fase-consulenza: var(--fase-consulenza);
+  --color-fase-proposta: var(--fase-proposta);
+  --color-fase-firmato: var(--fase-firmato);
+  --color-fase-perso: var(--fase-perso);
+  --color-tipo-nota: var(--tipo-nota);
+  --color-tipo-nota-soft: var(--tipo-nota-soft);
+  --color-tipo-nota-line: var(--tipo-nota-line);
+  --color-tipo-chiamata: var(--tipo-chiamata);
+  --color-tipo-chiamata-soft: var(--tipo-chiamata-soft);
+  --color-tipo-email: var(--tipo-email);
+  --color-tipo-email-soft: var(--tipo-email-soft);
+  --color-tipo-whatsapp: var(--tipo-whatsapp);
+  --color-tipo-whatsapp-soft: var(--tipo-whatsapp-soft);
+  --color-tipo-compito: var(--tipo-compito);
+  --color-tipo-compito-soft: var(--tipo-compito-soft);
+  --color-tipo-messaggio: var(--tipo-messaggio);
+  --color-tipo-messaggio-soft: var(--tipo-messaggio-soft);
+  --color-tipo-incontro: var(--tipo-incontro);
+  --color-tipo-incontro-soft: var(--tipo-incontro-soft);
+  --color-avatar-0: var(--avatar-0);
+  --color-avatar-0-ink: var(--avatar-0-ink);
+  --color-avatar-1: var(--avatar-1);
+  --color-avatar-1-ink: var(--avatar-1-ink);
+  --color-avatar-2: var(--avatar-2);
+  --color-avatar-2-ink: var(--avatar-2-ink);
+  --color-avatar-3: var(--avatar-3);
+  --color-avatar-3-ink: var(--avatar-3-ink);
+  --color-avatar-4: var(--avatar-4);
+  --color-avatar-4-ink: var(--avatar-4-ink);
+  --color-avatar-5: var(--avatar-5);
+  --color-avatar-5-ink: var(--avatar-5-ink);
+  --color-avatar-6: var(--avatar-6);
+  --color-avatar-6-ink: var(--avatar-6-ink);
+
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  html {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  body {
+    @apply bg-background text-foreground font-sans text-sm;
+    font-feature-settings: "cv11", "tnum";
+  }
+  svg.lucide {
+    stroke-width: 1.5;
+  }
+  :focus-visible {
+    outline-color: var(--acc);
+  }
+}
+
+a,
+button {
+  cursor: pointer;
+}
+
+input {
+  cursor: text;
+}
+
+@media screen and (max-width: 768px) {
+  input,
+  textarea,
+  select {
+    font-size: 16px !important;
+  }
+}
+
+a[aria-disabled="true"],
+button[aria-disabled="true"],
+button:disabled,
+input[aria-disabled="true"],
+input:disabled {
+  cursor: not-allowed;
+}
+
+input[type="date"],
+input[type="datetime-local"],
+input[type="month"],
+input[type="time"] {
+  position: relative;
+}
+
+@media (max-width: 767px) {
+  html {
+    overscroll-behavior-y: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    transition: none !important;
+    animation: none !important;
+  }
+}

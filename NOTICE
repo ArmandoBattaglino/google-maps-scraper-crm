@@ -1,0 +1,109 @@
+Avvisi sul codice di terzi
+==========================
+
+Le parti elencate qui sotto vengono da progetti di terzi. Le loro licenze restano valide per quelle parti e sono
+riportate per intero. Il resto del repository è sotto la licenza del file LICENSE.
+
+
+1. Atomic CRM (marmelab)
+------------------------
+
+  repo        https://github.com/marmelab/atomic-crm
+  commit      45ae36f205445575801ba31c54eeeef13ac8808a (main del 2026-11-03, «Merge pull request #408»)
+  copiato il  2026-11-04
+  licenza     MIT
+
+  Cosa è copiato (in web/, con le modifiche descritte in web/README.md):
+    web/src/components/admin/   i componenti di Shadcn Admin Kit inclusi in Atomic CRM
+    web/src/components/ui/      i componenti shadcn/ui inclusi in Atomic CRM
+    web/src/hooks/  web/src/lib/  web/src/index.css  web/components.json  web/tsconfig*.json
+
+  The MIT License (MIT)
+
+  Copyright (c) 2024-present, Francois Zaninotto, Marmelab
+
+  Permission is hereby granted, free of charge, to any person obtaining a copy
+  of this software and associated documentation files (the "Software"), to deal
+  in the Software without restriction, including without limitation the rights
+  to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+  copies of the Software, and to permit persons to whom the Software is
+  furnished to do so, subject to the following conditions:
+
+  The above copyright notice and this permission notice shall be included in all
+  copies or substantial portions of the Software.
+
+  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+  FITNESS FOR A PARTICULAR PURPOSE AND NON INFRINGEMENT. IN NO EVENT SHALL THE
+  AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+  SOFTWARE.
+
+
+2. shadcn/ui
+------------
+
+  repo        https://github.com/shadcn-ui/ui
+  versione    pacchetto npm «shadcn» 4.23.0
+  licenza     MIT
+
+  Cosa è copiato: web/src/shadcn.css (estratto di shadcn/tailwind.css). I componenti di web/src/components/ui/
+  arrivano da shadcn/ui attraverso Atomic CRM.
+
+  MIT License
+
+  Copyright (c) 2023 shadcn
+
+  Permission is hereby granted, free of charge, to any person obtaining a copy
+  of this software and associated documentation files (the "Software"), to deal
+  in the Software without restriction, including without limitation the rights
+  to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+  copies of the Software, and to permit persons to whom the Software is
+  furnished to do so, subject to the following conditions:
+
+  The above copyright notice and this permission notice shall be included in all
+  copies or substantial portions of the Software.
+
+  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+  FITNESS FOR A PARTICULAR PURPOSE AND NON INFRINGEMENT. IN NO EVENT SHALL THE
+  AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+  SOFTWARE.
+
+
+3. Inter (il carattere dell'app)
+-----------------------------------------
+
+  repo        https://github.com/rsms/inter
+  da dove     Google Fonts, Inter v20, sottoinsiemi variabili latin e latin-ext, pesi 400-600 (scaricati il 2026-11-04)
+  licenza     SIL Open Font License 1.1, testo intero in web/src/fonts/OFL.txt
+  copyright   Copyright (c) 2016 The Inter Project Authors
+
+  Cosa è copiato: web/src/fonts/inter-latin.woff2 e web/src/fonts/inter-latin-ext.woff2, senza modifiche. Il
+  carattere viene servito dall'app stessa (web/dist): il browser non chiama Google.
+
+
+4. Le librerie delle viste : dipendenze npm, nessun file copiato
+-------------------------------------------------------------------------------------
+
+  @tanstack/react-table 8                 MIT           la tabella fino alla soglia
+  @glideapps/glide-data-grid 6.0.4-alpha  MIT           la griglia oltre la soglia (l'alpha è la prima con React 19)
+  marked · react-responsive-carousel      MIT           le dipendenze fra pari di Glide
+  @fullcalendar/{core,react,daygrid,      MIT           il calendario.
+    timegrid,list,interaction} 6.1
+  maplibre-gl 6                           BSD-3-Clause  la mappa; le tile sono di OpenFreeMap, i dati di OpenStreetMap
+
+
+Le dipendenze npm di web/ hanno le loro licenze (MIT, ISC, Apache-2.0, BSD, 0BSD per tutto ciò che finisce in
+dist/); si controllano con `npx license-checker --excludePrivatePackages --production --summary` in web/.
+
+
+5. I confini dei comuni
+-----------------------
+
+  fonte       ISTAT, confini amministrativi generalizzati al 1/1/2025 (Limiti01012025_g)
+  licenza     Creative Commons Attribuzione (CC BY), come indicato dall'ISTAT
+  dove        raccoglitore/raccolte/confini/

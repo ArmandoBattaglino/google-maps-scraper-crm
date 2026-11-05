@@ -1,0 +1,61 @@
+.pannello-velo {
+  position: fixed;
+  inset: 0;
+  z-index: 40;
+  background: var(--velo);
+  animation: pannello-velo-entra var(--pannello-durata) ease-out;
+}
+
+.pannello-foglio {
+  position: fixed;
+  inset-block: 0;
+  right: 0;
+  z-index: 40;
+  display: flex;
+  flex-direction: column;
+  width: min(var(--pannello), calc(100vw - var(--pannello-fuori)));
+  background: var(--bg);
+  box-shadow: var(--ombra-pannello);
+  outline: none;
+  animation: pannello-entra var(--pannello-durata) cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+@media (max-width: 899px) {
+  .pannello-foglio {
+    width: 100vw;
+  }
+}
+
+.pannello-velo[data-stato="uscita"] {
+  pointer-events: none;
+  animation: pannello-velo-esce var(--pannello-durata-uscita) ease-in forwards;
+}
+
+.pannello-foglio[data-stato="uscita"] {
+  pointer-events: none;
+  animation: pannello-esce var(--pannello-durata-uscita) ease-in forwards;
+}
+
+@keyframes pannello-entra {
+  from {
+    transform: translateX(100%);
+  }
+}
+
+@keyframes pannello-esce {
+  to {
+    transform: translateX(100%);
+  }
+}
+
+@keyframes pannello-velo-entra {
+  from {
+    opacity: 0;
+  }
+}
+
+@keyframes pannello-velo-esce {
+  to {
+    opacity: 0;
+  }
+}

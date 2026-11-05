@@ -1,0 +1,56 @@
+# Il CRM e lo scraper su una macchina sola: docker compose up -d --build
+name: crm-kit
+
+services:
+  db:
+    image: postgres:17.11-alpine
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-crm}
+      APP_DB_PASSWORD: ${APP_DB_PASSWORD:-crm}
+    volumes:
+      - dati:/var/lib/postgresql/data
+      - ./db:/kit:ro
+      - ./db/init.sh:/docker-entrypoint-initdb.d/00-init.sh:ro
+    # il database non ha porte: lo raggiungono solo gli altri due container, sulla rete interna
+    networks: [interna]
+    healthcheck:
+      test: ["CMD-SHELL", "test \"$$(psql -U postgres -d crm -Atc 'select 1 from app.soci limit 1' 2>/dev/null)\" = 1"]
+      interval: 5s
+      timeout: 5s
+      retries: 60
+
+  crm:
+    build: .
+    restart: unless-stopped
+    depends_on:
+      db: { condition: service_healthy }
+    environment:
+      DATABASE_URL: postgres://crm_app:${APP_DB_PASSWORD:-crm}@db:5432/crm
+      APP_NOME: ${APP_NOME:-CRM}
+      CONSENTI_HOST: ${CONSENTI_HOST:-}
+      RACCOLTE_URL: http://raccoglitore:5320
+    ports:
+      - "${BIND_IP:-127.0.0.1}:${PORTA:-5330}:5330"
+    networks: [interna, fuori]
+
+  raccoglitore:
+    build: ./raccoglitore
+    restart: unless-stopped
+    init: true
+    mem_limit: 2g
+    cap_drop: [ALL]
+    depends_on:
+      db: { condition: service_healthy }
+    environment:
+      DATABASE_URL: postgres://crm_app:${APP_DB_PASSWORD:-crm}@db:5432/crm
+      RACCOLTE_PAUSA_CAPTCHA_S: ${RACCOLTE_PAUSA_CAPTCHA_S:-10800}
+    networks: [interna, fuori]
+
+networks:
+  interna: { internal: true }
+  fuori: {}
+
+volumes:
+  dati: {}

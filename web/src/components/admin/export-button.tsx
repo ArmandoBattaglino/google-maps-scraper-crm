@@ -1,0 +1,107 @@
+import * as React from "react";
+import { useCallback } from "react";
+import { Download } from "lucide-react";
+import type { Exporter } from "ra-core";
+import {
+  fetchRelatedRecords,
+  useDataProvider,
+  useGetResourceLabel,
+  useNotify,
+  useListContext,
+  useResourceTranslation,
+} from "ra-core";
+import { Button } from "@/components/ui/button";
+
+export const ExportButton = (props: ExportButtonProps) => {
+  const {
+    maxResults = 1000,
+    onClick,
+    label: labelProp,
+    icon = defaultIcon,
+    exporter: customExporter,
+    meta,
+    className = "cursor-pointer",
+  } = props;
+  const {
+    getData,
+    total,
+    resource,
+    exporter: exporterFromContext,
+  } = useListContext();
+  const getResourceLabel = useGetResourceLabel();
+  const label = useResourceTranslation({
+    resourceI18nKey: `resources.${resource}.action.export`,
+    baseI18nKey: "ra.action.export",
+    options: {
+      name: getResourceLabel(resource, 1),
+    },
+    userText: labelProp,
+  });
+  const exporter = customExporter || exporterFromContext;
+  const dataProvider = useDataProvider();
+  const notify = useNotify();
+  const handleClick = useCallback(
+    (event: React.MouseEvent<HTMLButtonElement>) => {
+      if (!getData) {
+        throw new Error(
+          "ListContext.getData must be defined to use ExportButton.",
+        );
+      }
+
+      getData({ maxResults, meta })
+        .then(
+          (data) =>
+            exporter &&
+            exporter(
+              data,
+              fetchRelatedRecords(dataProvider),
+              dataProvider,
+              resource,
+            ),
+        )
+        .catch((error) => {
+          console.error(error);
+          notify("HTTP Error", { type: "error" });
+        });
+      if (typeof onClick === "function") {
+        onClick(event);
+      }
+    },
+    [
+      dataProvider,
+      exporter,
+      getData,
+      notify,
+      onClick,
+      resource,
+      maxResults,
+      meta,
+    ],
+  );
+
+  return (
+    <Button
+      variant="outline"
+      onClick={handleClick}
+      disabled={total === 0}
+      className={className}
+    >
+      {icon}
+      {label}
+    </Button>
+  );
+};
+
+const defaultIcon = <Download />;
+
+export interface ExportButtonProps {
+  className?: string;
+  exporter?: Exporter;
+  icon?: React.ReactNode;
+  label?: string;
+  maxResults?: number;
+  onClick?: (e: React.MouseEvent<HTMLButtonElement>) => void;
+  resource?: string;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  meta?: any;
+}
